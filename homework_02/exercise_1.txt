@@ -1,0 +1,30 @@
+Q1:
+setTimeout():
+1.The accuracy is not high
+2.Maybe delays in execution
+3.Use red-black trees
+setImmediate():
+1.Does not cause blocking
+2.the efficiency is the lowest
+
+Q2:
+process.nextTick():
+1.The most efficient
+2.but blocks next calls of the CPU;
+Process.nextTick has higher priority and it is micro task. but setImmediate is task.
+
+Q3:
+1. cluster
+2. buffer
+3. assertS
+4. https
+5. fs
+6. domain
+7. dns
+8. querystring
+9. os
+10. querystring
+
+
+
+
