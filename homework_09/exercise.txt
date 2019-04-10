@@ -1,0 +1,92 @@
+//q1
+[
+  {
+    '$match': {
+      'state': 'NH'
+    }
+  }, {
+    '$project': {
+      '_id': 0, 
+      'zipcode': '$_id'
+    }
+  }
+]
+
+//q2
+[
+  {
+    '$match': {
+      'state': 'NH', 
+      'pop': {
+        '$lt': 5000
+      }
+    }
+  }, {
+    '$project': {
+      '_id': 0, 
+      'zipcode': '$_id'
+    }
+  }
+]
+
+//q3
+[
+  {
+    '$group': {
+      '_id': {
+        'city': '$city', 
+        'state': '$state'
+      }, 
+      'count_zipcodes': {
+        '$sum': 1
+      }
+    }
+  }, {
+    '$match': {
+      'count_zipcodes': {
+        '$gt': 1
+      }
+    }
+  }, {
+    '$sort': {
+      'state': 1, 
+      'city': 1
+    }
+  }
+]
+
+//q4
+[
+  {
+    '$group': {
+      '_id': {
+        'state': '$state', 
+        'city': '$city'
+      }, 
+      'total_pop': {
+        '$sum': '$pop'
+      }
+    }
+  }, {
+    '$sort': {
+      'total_pop': -1
+    }
+  }, {
+    '$group': {
+      '_id': {
+        'state': '$_id.state', 
+        'city': '$_id.city'
+      }, 
+      'highest_pop': {
+        '$first': '$total_pop'
+      }
+    }
+  }, {
+    '$project': {
+      '_id': 0, 
+      'state': '$_id.state', 
+      'city': '$_id.city', 
+      'population': '$highest_pop'
+    }
+  }
+]
